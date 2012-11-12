@@ -1,0 +1,21 @@
+[user]
+	name = Sergey Morozov
+	email = sergey.morozov@corp.mail.ru
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[pretty]
+    simple = "<%h> %ad [%an] %Cgreen%d%Creset %s"
+    compact = "%Cred%h%Creset - %Cgreen%cr%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset"
+[alias]
+    graph = log --graph --date-order -C -M --pretty=compact --all --date=short
+    graph2 = log --graph --date-order -C -M --pretty=simple --all --date=short
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    mg = merge
+[diff]
+    tool = vimdiff
