@@ -1,6 +1,8 @@
 [user]
 	name = Sergey Morozov
 	email = sergey.morozov@corp.mail.ru
+[push]
+    default = tracking
 [color]
 	branch = auto
 	diff = auto
