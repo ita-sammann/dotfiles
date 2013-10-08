@@ -264,7 +264,8 @@
     map <S-Insert> <esc>"+gPi
 
     " Пробел перелистывает страницы
-    nmap <Space> <PageDown>
+    " nmap <Space> <PageDown>
+    " Нахуй-нахуй!
 
     " C-c and C-v - Copy/Paste в глобальный клипборд"
     vmap <C-C> "+yi
@@ -637,7 +638,7 @@
         endtry
 
     " MiniBufExplorer
-        let g:miniBufExplBRSplit = 0
+        let g:miniBufExplBRSplit = 1    " список буферов справа
         let g:miniBufExplVSplit = 10
         let g:miniBufExplMaxSize = 45
 
@@ -694,13 +695,13 @@
     " }}}
     " Airline {{{
         let g:airline_theme='solarized'
-        let g:airline_powerline_fonts = 0
+        let g:airline_powerline_fonts = 1
         let g:airline_section_b='%{getcwd()}'
         let g:airline#extensions#whitespace#checks = [ 'trailing' ]
         let g:airline#extensions#ctrlp#color_template = 'normal'
         let g:airline#extensions#ctrlp#show_adjacent_modes = 1
-        let g:airline_left_sep=''
-        let g:airline_right_sep=''
+        "let g:airline_left_sep=''
+        "let g:airline_right_sep=''
     " }}}
     " IndentLine {{{
         let g:indentLine_color_term = 11
