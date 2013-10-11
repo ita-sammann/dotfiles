@@ -1,10 +1,11 @@
+" vim:ft=vim:fdm=marker:fdl=0:fen:
 "=============================================================================
 " Description: Vimi bundle .vimrc
 " Author: Vyacheslav Oliyanchuk <miripiruni@gmail.com>
 " URL: http://github.com/miripiruni/vimi/
 "=============================================================================
 
-" Vundle setup
+" Vundle setup {{{
     set nocompatible " be iMproved
     filetype off     " required!
 
@@ -54,6 +55,7 @@
         Bundle 'git://github.com/leshill/vim-json.git'
     " Perl
         Bundle 'git://github.com/vim-perl/vim-perl.git'
+        "Bundle 'perlomni.vim'
     " Xslate
         Bundle 'git://github.com/motemen/xslate-vim.git'
     " Django
@@ -70,8 +72,9 @@
     " :BundleSearch(!) foo - search(or refresh cache first) for foo
     " :BundleClean(!)      - confirm(or auto-ap prove) removal of unused bundles
     " see :h vundle for more details or wiki for FAQ
+" }}}
 
-" Interface
+" Interface {{{
     set ttyfast                      " коннект с терминалом быстрый
     "set nonumber                    " Не показываем нумерацию строк
                                      " Во-первых, номер текущей строки всегда
@@ -156,10 +159,12 @@
     endif
 
     set hidden " this allows to edit several files in the same time without having to save them
+" }}}
 
-    " Не бибикать!
+    " Не бибикать! {{{
         set novisualbell
         set t_vb=
+    " }}}
 
     " http://www.allaboutvim.ru/2012/03/blog-post.html
         set isfname+=-
@@ -234,14 +239,14 @@
 
         set foldcolumn=2        " Ширина строки где располагается фолдинг
         set foldmethod=indent   " Фолдинг по отступам
-        set foldnestmax=20      " Глубина фолдинга 10 уровней
-        set nofoldenable        " Не фолдить по умолчанию
-        set foldlevel=0         " This is just what i use
+        set foldnestmax=10      " Глубина фолдинга 10 уровней
+        set foldenable          " Не^W фолдить по умолчанию
+        set foldlevel=10        " This is just what i use
 
     " Не показывать парную скобку
-        let loaded_matchparen=1 " перестает прыгать на парную скобку, показывая где она. +100 к скорости
-        "set noshowmatch    " Не показывать парные <> в HTML
-        set showmatch       " показываем открывающие и закрывающие скобки
+        "let loaded_matchparen=1 " бред какой-то... перестает прыгать на парную скобку, показывая где она. +100 к скорости
+        set noshowmatch          " Не прыгать по парным скобкам <s>Не показывать парные <> в HTML</s>
+        "set showmatch           " показываем открывающие и закрывающие скобки
 
 " Search
     set incsearch   " При поиске перескакивать на найденный текст в процессе набора строки
@@ -259,6 +264,7 @@
 
     " ,пробел выключает подсветку результатов поиска
     map <leader><space> :noh<CR>
+    map <silent> <F7>   :noh<CR>
 
     " shift-insert как в Xterm
     map <S-Insert> <esc>"+gPi
@@ -311,7 +317,7 @@
         " Toggle type of line numbers
         " http://stackoverflow.com/questions/4387210/vim-how-to-map-two-tasks-under-one-shortcut-key
         " vim 7.3 required
-        let g:relativenumber = 0
+        let g:relativenumber = 1
         function! ToogleRelativeNumber()
           if g:relativenumber == 0
             let g:relativenumber = 1
@@ -331,6 +337,8 @@
           endif
         endfunction
         map <Leader>nm :call ToogleRelativeNumber()<cr>
+        nnoremap <F4>  :call ToogleRelativeNumber()<CR>
+        inoremap <F4>  <Esc>:call ToogleRelativeNumber()<CR>a
 
     " ,g
         function! ToggleGUINoise()
@@ -373,9 +381,6 @@
     " ,v
         " Pressing ,v opens the .vimrc in a new tab
         nmap <leader>v :edit $MYVIMRC<CR>
-
-    " <Space> = <PageDown> Как в браузерах
-        nmap <Space> <PageDown>
 
     " n и N
         " когда бегаем по результатам поиска, то пусть они всегда будут в центре
@@ -461,16 +466,18 @@
 
     " ,n
         " Edit another file in the same directory with the current one
-        map <Leader>n :e <C-R>=expand("%:p:h") . '/'<CR>
+        "map <Leader>n :e <C-R>=expand("%:p:h") . '/'<CR>
 
     " Bind :Q to :q
         command! Q q
 
     " {<CR>
         " auto complete {} indent and position the cursor in the middle line
-        inoremap {<CR> {<CR>}<Esc>O
-        inoremap (<CR> (<CR>)<Esc>O
-        inoremap [<CR> [<CR>]<Esc>O
+        "inoremap {<CR> {<CR>}<Esc>O
+        "inoremap (<CR> (<CR>)<Esc>O
+        "inoremap [<CR> [<CR>]<Esc>O
+        " Полезные мапы, но, увы, терпеть паузы после ввода каждой скобки нет
+        " никаких сил
 
     " Fold with space
         " nnoremap <Space> za
@@ -550,15 +557,15 @@
         map Ю >
 
     " Разное
-        map <F12> :Ex<CR>
         nnoremap <F3>  :set expandtab!<CR>
-        nnoremap <F4>  :set nu!<CR>
+        inoremap <F3>  <Esc>:set expandtab!<CR>a
         nnoremap <F5>  :MBEbp<CR>
+        inoremap <F5>  <Esc>:MBEbp<CR>
         nnoremap <F8>  :MBEbn<CR>
+        inoremap <F8>  <Esc>:MBEbn<CR>
         nnoremap <F10> :MBEbd<CR>
         nnoremap <F6>  :MBEbd<CR>
         nnoremap * *N
-        nnoremap <silent> <F7> :nohlsearch<CR>
         vnoremap <silent> * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
 
 " Abbrs
@@ -571,7 +578,8 @@
     set history=1000 " store lots of :cmdline history
     "cmap w!! %!sudo tee > /dev/null % " save file with root permissions"
     " Save file with root permissions
-    command! W exec 'w !sudo tee % > /dev/null' | e!
+    command! W w
+    command! Wsudo exec 'w !sudo tee % > /dev/null' | e!
 
     " Backspacing settings
         " start     allow backspacing over the start of insert;
@@ -599,11 +607,12 @@
         endif
 
     " Auto change the directory to the current file I'm working on
-        autocmd BufEnter * lcd %:p:h
+        "autocmd BufEnter * lcd %:p:h
 
 " File specific
     au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
     au BufRead,BufNewFile *.html if  search('{{') > 0  || search('{%') > 0 | set filetype=htmldjango | endif
+    au BufRead,BufNewFile *.tpl  set filetype=tt2html
     au BufRead,BufNewFile *.psgi set filetype=perl
     au BufRead,BufNewFile *.t    set filetype=perl
     au BufRead,BufNewFile *.less set filetype=less
@@ -654,13 +663,14 @@
         let NERDTreeWinSize=60
 
     " autocomplpop.vim {{{
+        "let g:acp_behaviorPerlOmniLength = 2         " ипользовать perlomni.vim
         let g:acp_enableAtStartup        = 1         " включить при старте системы
         let g:acp_mappingDriven          = 0         " если 1 то будет включаться по хоткею
         let g:acp_ignorecaseOption       = 1         " игнорировать регистр
         let g:acp_completeOption         = '.,w,b,k' " опции дополнения (completeopt)
         let g:acp_completeoptPreview     = 0         " показывать превью дополнения
         let g:acp_behaviorKeywordCommand = "\<C-n>"  " комманда для автодополнения
-        let g:acp_behaviorKeywordLength  = 3         " количество символов для начала дополнения
+        let g:acp_behaviorKeywordLength  = 2         " количество символов для начала дополнения
         let g:acp_behaviorKeywordIgnores = []        " не дополнять эти слова
     " }}}
 
