@@ -124,9 +124,9 @@
     set linespace=1                " add some line space for easy reading
     set cursorline                 " Подсветка строки, в которой находится в данный момент курсор
     set gcr=n:blinkon0             " Отключаем мигание курсора в MacVim. Больше никакого стресса.
-    set guioptions=                " Вырубаем все лишнее из ГУИ, если надо потогглить см <F6>
+    "set guioptions=                " Вырубаем все лишнее из ГУИ, если надо потогглить см <F6>
     set t_Co=256                   " Кол-во цветов
-    set guicursor=                 " Отключаем мигание курсора
+    "set guicursor=                 " Отключаем мигание курсора
     set splitbelow                 " новый сплит будет ниже текущего :sp
     set splitright                 " новый сплит будет правее текущего :vsp
     set shortmess+=I               " не показывать intro screen
@@ -143,19 +143,19 @@
     if has('gui_running')
         "set gfn=Ubuntu\ Mono\ 14
         "set gfn=Droid\ Sans\ Mono\ for\ Powerline\ 12
-        set guifont=Monaco:h13
-        set guioptions-=m
-        set guioptions-=T
-        set guioptions-=r
-        set guioptions-=l
-        set guioptions+=c
-        "set antialias
-        set mousehide
-        set noguipty
-        set cursorline
-        set guicursor+=a:blinkon0
-        set guiheadroom=0
-        set guitablabel=%N\ %f\ %M
+        set guifont=Monaco\ for\ Powerline:h13
+        "set guioptions-=m
+        "set guioptions-=T
+        "set guioptions-=r
+        "set guioptions-=l
+        "set guioptions+=c
+        " set antialias
+        "set mousehide
+        "set noguipty
+        "set cursorline
+        "set guicursor+=a:blinkon0
+        "set guiheadroom=0
+        "set guitablabel=%N\ %f\ %M
     endif
 
     set hidden " this allows to edit several files in the same time without having to save them
@@ -283,7 +283,11 @@
 
     " ,m
         " в Normal mode тогглит поддержку мыши
-        set mouse=
+        if has('gui_running')
+            set mouse=a
+        else
+            set mouse=
+        endif
         function! ToggleMouse()
           if &mouse == 'a'
             set mouse=
