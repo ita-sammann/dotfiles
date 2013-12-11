@@ -64,6 +64,8 @@
         "Bundle 'UltiSnips'
     " Nginx
         Bundle 'nginx.vim'
+    " Zen coding
+        Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
     filetype plugin indent on     " required!
     " Brief help
@@ -257,7 +259,7 @@
 
 
 " Шорткаты
-    let mapleader = "," " мапим <Leader> на запятую. По умолчанию <Leader> это обратный слэш \
+    "let mapleader = "," " мапим <Leader> на запятую. По умолчанию <Leader> это обратный слэш \
 
     " Переназначение ESC
     inoremap jj <ESC>
@@ -565,8 +567,12 @@
         inoremap <F3>  <Esc>:set expandtab!<CR>a
         nnoremap <F5>  :MBEbp<CR>
         inoremap <F5>  <Esc>:MBEbp<CR>
+        nnoremap <S-Up> :MBEbp<CR>
+        inoremap <S-Up> <Esc>:MBEbp<CR>
         nnoremap <F8>  :MBEbn<CR>
         inoremap <F8>  <Esc>:MBEbn<CR>
+        nnoremap <S-Down> :MBEbn<CR>
+        inoremap <S-Down> <Esc>:MBEbn<CR>
         nnoremap <F10> :MBEbd<CR>
         nnoremap <F6>  :MBEbd<CR>
         nnoremap * *N

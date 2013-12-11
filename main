@@ -20,7 +20,7 @@ export EDITOR=vim
 export PAGER=less
 export CLICOLOR=1
 
-alias ll='ls -lah'
+alias ll='ls -lAFh'
 alias grep='grep'
 alias du='du -h'
 alias df='df -h'
