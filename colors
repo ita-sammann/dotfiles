@@ -119,6 +119,12 @@ color_bg_red=
 color_off=
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     color_is_on=true
+
+    fg_black="\[$(/usr/bin/tput setaf 0)\]"
+    bg_black="\[$(/usr/bin/tput setab 0)\]"
+    fg_bar1="\[$(/usr/bin/tput setaf 10)\]"
+    bg_bar1="\[$(/usr/bin/tput setab 10)\]"
+
     color_red="\[$(/usr/bin/tput setaf 1)\]"
     color_green="\[$(/usr/bin/tput setaf 2)\]"
     color_yellow="\[$(/usr/bin/tput setaf 3)\]"
@@ -130,3 +136,6 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     color_error_off="$(/usr/bin/tput sgr0)"
 fi
 
+# 24-bit colors
+fg24_555='\[\e[38;2;211;211;211m\]'
+bg24_555='\[\e[48:2:211:211:211m\]'
