@@ -58,6 +58,8 @@
         "Bundle 'perlomni.vim'
     " Xslate
         Bundle 'git://github.com/motemen/xslate-vim.git'
+    " Mojolicious
+        Bundle 'yko/mojo.vim'
     " Django
         "Bundle 'django.vim'
     " Snippets
@@ -111,7 +113,7 @@
                                      " {lines}x{columns}.
     " set scrolljump=5
     " set scrolloff=3
-    set scrolloff=999              " focus mode like in Writer app http://www.iawriter.com/
+    set scrolloff=0                " focus mode like in Writer app http://www.iawriter.com/
     set showtabline=1              " Показывать вкладки табов только когда их больше одной
     set nowrap                     " Выключаем перенос строк (http://vimcasts.org/episodes/soft-wrapping-text/)
     set formatoptions-=o           " dont continue comments when pushing o/O
@@ -123,8 +125,8 @@
     set shiftwidth=4               " Размер сдвига при нажатии на клавиши << и >>
     set tabstop=4                  " Размер табуляции
     set softtabstop=4
-    set linespace=1                " add some line space for easy reading
-    set cursorline                 " Подсветка строки, в которой находится в данный момент курсор
+    set linespace=1                " do not add some line space for easy reading; airline looks ugly with it
+    set nocursorline                 " Подсветка строки, в которой находится в данный момент курсор
     set gcr=n:blinkon0             " Отключаем мигание курсора в MacVim. Больше никакого стресса.
     "set guioptions=                " Вырубаем все лишнее из ГУИ, если надо потогглить см <F6>
     set t_Co=256                   " Кол-во цветов
@@ -145,13 +147,15 @@
     if has('gui_running')
         "set gfn=Ubuntu\ Mono\ 14
         "set gfn=Droid\ Sans\ Mono\ for\ Powerline\ 12
-        set guifont=Monaco\ for\ Powerline:h13
+        "set gfn=Monaco\ for\ Powerline:h13
+        "set gfn=Consolas:h14
+        set gfn=PragmataPro\ for\ Powerline:h15
         "set guioptions-=m
         "set guioptions-=T
         "set guioptions-=r
         "set guioptions-=l
         "set guioptions+=c
-        " set antialias
+        set antialias " Обязательно сглаживание шрифитов
         "set mousehide
         "set noguipty
         "set cursorline
