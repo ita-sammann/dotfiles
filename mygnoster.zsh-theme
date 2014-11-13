@@ -200,7 +200,7 @@ prompt_date() {
 }
 
 prompt_devenv() {
-  [[ -n "$ENV_COLOR" ]] || $ENV_COLOR = 'yellow'
+  [[ -n "$ENV_COLOR" ]] || ENV_COLOR='yellow'
   [[ -n "$ENV_NAME" ]] && prompt_segment $ENV_COLOR black "$ENV_NAME"
 }
 
