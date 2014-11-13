@@ -14,60 +14,68 @@
 
     " let Vundle manage Vundle
     " required!
-    Bundle 'git://github.com/gmarik/vundle.git'
+    Plugin 'gmarik/vundle'
 
     " My Bundles here:
     " NOTE: comments after Bundle command are not allowed...
     "
     " IDE
-        Bundle 'DfrankUtil'
-        Bundle 'vimprj'
+        Plugin 'DfrankUtil'
+        Plugin 'vimprj'
 
     " Interface
-        "Bundle 'git://github.com/nanotech/jellybeans.vim.git'
-        Bundle 'git://github.com/altercation/vim-colors-solarized.git'
-        Bundle 'git://github.com/scrooloose/nerdtree.git'
-        Bundle 'git://github.com/fholgado/minibufexpl.vim.git'
-        Bundle 'git://github.com/Yggdroot/indentLine.git'
+        "Plugin 'nanotech/jellybeans.vim'
+        Plugin 'altercation/vim-colors-solarized'
+        Plugin 'scrooloose/nerdtree'
+        Plugin 'fholgado/minibufexpl.vim'
+        Plugin 'Yggdroot/indentLine'
 
-        Bundle 'git://github.com/ervandew/supertab.git'
-        Bundle 'git://github.com/vim-scripts/AutoComplPop.git'
+        Plugin 'ervandew/supertab'
+        Plugin 'vim-scripts/AutoComplPop'
 
-        Bundle 'git://github.com/godlygeek/tabular.git'
-        Bundle 'git://github.com/scrooloose/nerdcommenter.git'
-        Bundle 'git://github.com/tpope/vim-surround.git'
-        Bundle 'git://github.com/tpope/vim-repeat.git'
-        Bundle 'git://github.com/tpope/vim-fugitive.git'
-        Bundle 'git://github.com/vim-scripts/bufexplorer.zip.git'
+        Plugin 'godlygeek/tabular'
+        Plugin 'scrooloose/nerdcommenter'
+        Plugin 'tpope/vim-surround'
+        Plugin 'tpope/vim-repeat'
+        Plugin 'tpope/vim-fugitive'
+        "Plugin 'airblade/vim-gitgutter'
+        " gitgutter works bad with sshfs
+        Plugin 'vim-scripts/bufexplorer.zip'
 
-        Bundle 'git://github.com/edsono/vim-matchit.git'
-        Bundle 'kien/ctrlp.vim.git'
-        Bundle 'git://github.com/bling/vim-airline.git'
+        Plugin 'edsono/vim-matchit'
+        Plugin 'kien/ctrlp.vim'
+        Plugin 'bling/vim-airline'
+        "Plugin 'jeetsukumaran/vim-markology'
     " HTML/HAML
-        Bundle 'git://github.com/othree/html5.vim.git'
+        Plugin 'othree/html5.vim'
     " CSS/LESS
-        Bundle 'git://github.com/hail2u/vim-css3-syntax.git'
-        Bundle 'git://github.com/groenewege/vim-less'
+        Plugin 'hail2u/vim-css3-syntax'
+        Plugin 'groenewege/vim-less'
     " JavaScript
-        Bundle 'git://github.com/pangloss/vim-javascript.git'
-        Bundle 'git://github.com/itspriddle/vim-jquery.git'
+        Plugin 'pangloss/vim-javascript'
+        Plugin 'itspriddle/vim-jquery'
     " JSON
-        Bundle 'git://github.com/leshill/vim-json.git'
+        Plugin 'leshill/vim-json'
     " Perl
-        Bundle 'git://github.com/vim-perl/vim-perl.git'
-        "Bundle 'perlomni.vim'
+        Plugin 'vim-perl/vim-perl'
+        "Plugin 'perlomni.vim'
     " Xslate
-        Bundle 'git://github.com/motemen/xslate-vim.git'
+        Plugin 'motemen/xslate-vim'
     " Mojolicious
-        Bundle 'yko/mojo.vim'
+        Plugin 'yko/mojo.vim'
     " Django
-        "Bundle 'django.vim'
+        "Plugin 'django.vim'
     " Snippets
-        "Bundle 'UltiSnips'
+        "Plugin 'UltiSnips'
     " Nginx
-        Bundle 'nginx.vim'
+        Plugin 'nginx.vim'
     " Zen coding
-        Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+        Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    " Gist
+        Plugin 'mattn/webapi-vim'
+        Plugin 'mattn/gist-vim'
+    " Smart current directory
+        Plugin 'dbakker/vim-projectroot'
 
     filetype plugin indent on     " required!
     " Brief help
@@ -113,7 +121,7 @@
                                      " {lines}x{columns}.
     " set scrolljump=5
     " set scrolloff=3
-    set scrolloff=0                " focus mode like in Writer app http://www.iawriter.com/
+    " set scrolloff=0                " focus mode like in Writer app http://www.iawriter.com/
     set showtabline=1              " Показывать вкладки табов только когда их больше одной
     set nowrap                     " Выключаем перенос строк (http://vimcasts.org/episodes/soft-wrapping-text/)
     set formatoptions-=o           " dont continue comments when pushing o/O
@@ -506,6 +514,11 @@
     " Switch tabs with <Tab>
         nmap <Tab> gt
         nmap <S-Tab> gT
+        nnoremap <S-Left> gT
+        inoremap <S-Left> <Esc>gT
+        nnoremap <S-Right> gt
+        inoremap <S-Right> <Esc>gt
+
 
     " Ремапим русские символы
         " set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -632,6 +645,7 @@
 
     " Auto change the directory to the current file I'm working on
         "autocmd BufEnter * lcd %:p:h
+        autocmd BufEnter * ProjectRootCD
 
 " File specific
     au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
@@ -672,7 +686,7 @@
 
     " MiniBufExplorer
         let g:miniBufExplBRSplit = 1    " список буферов справа
-        let g:miniBufExplVSplit = 10
+        let g:miniBufExplVSplit = 1
         let g:miniBufExplMaxSize = 45
 
     " NERDTree

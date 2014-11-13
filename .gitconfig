@@ -24,3 +24,5 @@
     tool = vimdiff
 [core]
 	editor = vim
+[github]
+	user = edestler
