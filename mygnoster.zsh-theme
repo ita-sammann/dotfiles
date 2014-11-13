@@ -36,10 +36,32 @@ RIGHTPROMPT=''
 # rendering default background/foreground.
 prompt_segment() {
   local bg fg
-  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
-  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  if [[ -n $1 ]]; then
+    if [[ $1 =~ ':' ]]; then
+      bg="\e[48:2:${1}m"
+    else
+      bg="%K{$1}"
+    fi
+  else
+    bg="%k"
+  fi
+
+  if [[ -n $2 ]]; then
+    if [[ $2 =~ ':' ]]; then
+      fg="\e[38:2:${2}m"
+    else
+      fg="%F{$2}"
+    fi
+  else
+    fg="%f"
+  fi
+
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    LEFTPROMPT="$LEFTPROMPT %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+    if [[ $CURRENT_BG =~ ':' ]]; then
+      LEFTPROMPT="$LEFTPROMPT %{$bg\e[38:2:${CURRENT_BG}m%}$SEGMENT_SEPARATOR%{$fg%} "
+    else
+      LEFTPROMPT="$LEFTPROMPT %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+    fi
   else
     LEFTPROMPT="$LEFTPROMPT%{$bg%}%{$fg%} "
   fi
@@ -50,7 +72,11 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    LEFTPROMPT="$LEFTPROMPT %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    if [[ $CURRENT_BG =~ ':' ]]; then
+      LEFTPROMPT="$LEFTPROMPT %{%k\e[38:2:${CURRENT_BG}m%}$SEGMENT_SEPARATOR"
+    else
+      LEFTPROMPT="$LEFTPROMPT %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    fi
   else
     LEFTPROMPT="$LEFTPROMPT%{%k%}"
   fi
@@ -144,7 +170,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue black '%~'
+  prompt_segment '33:100:132' 'black' '%~'
 }
 
 # Virtualenv: current working virtualenv
@@ -192,7 +218,7 @@ build_prompt() {
 
   prompt_date
 
-  local zero='%([BSUbfksu]|([FB]|){*})'
+  local zero='%([BSUbfksu]|([FB]|){*})|\\e\[[1234567890:]*m'
   (( spacing_width = $COLUMNS - ${#${(S%%)LEFTPROMPT//$~zero/}} - ${#${(S%%)RIGHTPROMPT//$~zero/}} ))
   for i in {1..$spacing_width}; do
     spacing="${spacing}─"
@@ -203,5 +229,4 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
-#PROMPT=$'%{%f%b%k%}$(build_prompt) \E[38:2:128:255:128mHELLO\E[0m '
 #RPROMPT='$(build_rprompt)'
