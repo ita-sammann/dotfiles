@@ -124,7 +124,7 @@
     set tabstop=4                  " Размер табуляции
     set softtabstop=4
     set linespace=1                " add some line space for easy reading
-    set cursorline                 " Подсветка строки, в которой находится в данный момент курсор
+    set nocursorline                 " Подсветка строки, в которой находится в данный момент курсор
     set gcr=n:blinkon0             " Отключаем мигание курсора в MacVim. Больше никакого стресса.
     "set guioptions=                " Вырубаем все лишнее из ГУИ, если надо потогглить см <F6>
     set t_Co=256                   " Кол-во цветов
