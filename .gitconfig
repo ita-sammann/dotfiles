@@ -22,3 +22,5 @@
     mg = merge
 [diff]
     tool = vimdiff
+[core]
+	editor = vim
