@@ -24,5 +24,6 @@
     tool = vimdiff
 [core]
 	editor = vim
+	pager = less -FSinXR
 [github]
 	user = edestler
