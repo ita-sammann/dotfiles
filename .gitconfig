@@ -26,4 +26,4 @@
 	editor = vim
 	pager = less -FSinXR
 [github]
-	user = edestler
+	user = ita-sammann

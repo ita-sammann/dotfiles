@@ -46,6 +46,8 @@
         Plugin 'kien/ctrlp.vim'
         Plugin 'bling/vim-airline'
         "Plugin 'jeetsukumaran/vim-markology'
+    " Go
+        Plugin 'fatih/vim-go'
     " HTML/HAML
         Plugin 'othree/html5.vim'
     " CSS/LESS
@@ -655,6 +657,34 @@
     au BufRead,BufNewFile *.t    set filetype=perl
     au BufRead,BufNewFile *.less set filetype=less
 
+
+    au BufRead,BufNewFile,BufEnter *  call SetGoFmtHighlight()
+
+    function! SetGoFmtHighlight()
+        if (&ft=='go')
+            hi SpecialKey guibg=NONE
+            setlocal tabstop=8
+            setlocal shiftwidth=8
+            setlocal noexpandtab
+            if has('multi_byte')
+                if version >= 700
+                    set listchars=tab:┊\ ,extends:❯,precedes:❮,nbsp:×,trail:·
+                else
+                    set listchars=tab:\|\ ,extends:>,precedes:<,nbsp:_,trail:\   " dummy comment to calm trailing space check
+                endif
+            endif
+        else
+            hi SpecialKey guibg=#073642
+            if has('multi_byte')
+                if version >= 700
+                    set listchars=tab:┊\ ,extends:❯,precedes:❮,nbsp:×,trail:\   " dummy comment to calm trailing space check
+                else
+                    set listchars=tab:\|\ ,extends:>,precedes:<,nbsp:_,trail:\   " dummy comment to calm trailing space check
+                endif
+            endif
+        endif
+    endfunction
+
 " Цветовая схема
     syntax enable
     set background=dark
@@ -687,7 +717,8 @@
     " MiniBufExplorer
         let g:miniBufExplBRSplit = 1    " список буферов справа
         let g:miniBufExplVSplit = 1
-        let g:miniBufExplMaxSize = 45
+        let g:miniBufExplMaxHeight = 45
+        let g:miniBufExplMaxSize = 0
 
     " NERDTree
         let NERDTreeShowBookmarks=1
