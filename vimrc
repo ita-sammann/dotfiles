@@ -5,87 +5,88 @@
 " URL: http://github.com/miripiruni/vimi/
 "=============================================================================
 
-" Vundle setup {{{
+" Plug setup {{{
     set nocompatible " be iMproved
-    filetype off     " required!
 
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+    if empty(glob('~/.vim/autoload/plug.vim'))
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall | source $MYVIMRC
+    endif
 
-    " let Vundle manage Vundle
-    " required!
-    Plugin 'gmarik/vundle'
+    call plug#begin('~/.vim/bundle')
 
-    " My Bundles here:
-    " NOTE: comments after Bundle command are not allowed...
-    "
     " IDE
-        Plugin 'DfrankUtil'
-        Plugin 'vimprj'
+        Plug 'DfrankUtil'
+        Plug 'vimprj'
 
     " Interface
-        "Plugin 'nanotech/jellybeans.vim'
-        Plugin 'altercation/vim-colors-solarized'
-        Plugin 'scrooloose/nerdtree'
-        Plugin 'fholgado/minibufexpl.vim'
-        Plugin 'Yggdroot/indentLine'
+        "Plug 'nanotech/jellybeans.vim'
+        "Plug 'altercation/vim-colors-solarized'
+        Plug 'frankier/neovim-colors-solarized-truecolor-only'
+        Plug 'scrooloose/nerdtree'
+        Plug 'fholgado/minibufexpl.vim'
+        Plug 'Yggdroot/indentLine'
 
-        Plugin 'ervandew/supertab'
-        Plugin 'vim-scripts/AutoComplPop'
+        Plug 'ervandew/supertab'
+        "Plug 'vim-scripts/AutoComplPop'
 
-        Plugin 'godlygeek/tabular'
-        Plugin 'scrooloose/nerdcommenter'
-        Plugin 'tpope/vim-surround'
-        Plugin 'tpope/vim-repeat'
-        Plugin 'tpope/vim-fugitive'
-        "Plugin 'airblade/vim-gitgutter'
+        Plug 'godlygeek/tabular'
+        Plug 'scrooloose/nerdcommenter'
+        Plug 'tpope/vim-surround'
+        Plug 'tpope/vim-repeat'
+        Plug 'tpope/vim-fugitive'
+        "Plug 'airblade/vim-gitgutter'
         " gitgutter works bad with sshfs
-        Plugin 'vim-scripts/bufexplorer.zip'
+        Plug 'vim-scripts/bufexplorer.zip'
 
-        Plugin 'edsono/vim-matchit'
-        Plugin 'kien/ctrlp.vim'
-        Plugin 'bling/vim-airline'
-        "Plugin 'jeetsukumaran/vim-markology'
+        Plug 'edsono/vim-matchit'
+        Plug 'kien/ctrlp.vim'
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+        "Plug 'jeetsukumaran/vim-markology'
     " Go
-        Plugin 'fatih/vim-go'
+        Plug 'fatih/vim-go'
+        Plug 'Valloric/YouCompleteMe'
     " HTML/HAML
-        Plugin 'othree/html5.vim'
+        Plug 'othree/html5.vim'
     " CSS/LESS
-        Plugin 'hail2u/vim-css3-syntax'
-        Plugin 'groenewege/vim-less'
+        Plug 'hail2u/vim-css3-syntax'
+        Plug 'groenewege/vim-less'
     " JavaScript
-        Plugin 'pangloss/vim-javascript'
-        Plugin 'itspriddle/vim-jquery'
+        Plug 'pangloss/vim-javascript'
+        Plug 'itspriddle/vim-jquery'
     " JSON
-        Plugin 'leshill/vim-json'
+        Plug 'leshill/vim-json'
     " Perl
-        Plugin 'vim-perl/vim-perl'
-        "Plugin 'perlomni.vim'
+        Plug 'vim-perl/vim-perl'
+        "Plug 'perlomni.vim'
     " Xslate
-        Plugin 'motemen/xslate-vim'
+        Plug 'motemen/xslate-vim'
     " Mojolicious
-        Plugin 'yko/mojo.vim'
+        Plug 'yko/mojo.vim'
     " Django
-        "Plugin 'django.vim'
+        Plug 'django.vim'
+        Plug 'hdima/python-syntax'
+        Plug 'nvie/vim-flake8'
     " Snippets
-        "Plugin 'UltiSnips'
+        "Plug 'UltiSnips'
     " Nginx
-        Plugin 'nginx.vim'
+        Plug 'nginx.vim'
     " Zen coding
-        Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+        Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
     " Gist
-        Plugin 'mattn/webapi-vim'
-        Plugin 'mattn/gist-vim'
+        Plug 'mattn/webapi-vim'
+        Plug 'mattn/gist-vim'
     " Smart current directory
-        Plugin 'dbakker/vim-projectroot'
+        Plug 'dbakker/vim-projectroot'
+    " Tagbar
+        "Plug 'majutsushi/tagbar'
+    " FuzzyFinder
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+        Plug 'junegunn/fzf.vim'
 
-    filetype plugin indent on     " required!
-    " Brief help
-    " :BundleList          - list configured bundles
-    " :BundleInstall(!)    - install(update) bundles
-    " :BundleSearch(!) foo - search(or refresh cache first) for foo
-    " :BundleClean(!)      - confirm(or auto-ap prove) removal of unused bundles
-    " see :h vundle for more details or wiki for FAQ
+    call plug#end()
 " }}}
 
 " Interface {{{
@@ -97,7 +98,7 @@
                                      " где 1 — номер строки.
     set number                       " Все-таки показываем
 
-    set encoding=utf-8               " character encoding used inside Vim.
+    "set encoding=utf-8               " character encoding used inside Vim.
     set fileencodings=utf-8,cp1251   " Возможные кодировки файлов и последовательность определения
     set wildmode=list:longest,full   " Автодополнение на манер zsh
     set wildmenu                     " Саджест по <tab> в командной строке
@@ -109,6 +110,7 @@
     set wildignore+=.hg,.git,.svn    " Version control
     set wildignore+=*.DS_Store       " OSX bullshit
     set wildignore+=*.pyc            " Python byte code
+    set wildignorecase               " ignore case for autocompletion
     set title                        " window title
                                      " the title of the window will be set to the value of 'titlestring'
                                      " (if it is not empty), or to: filename [+=-] (path) - VIM
@@ -124,7 +126,7 @@
     " set scrolljump=5
     " set scrolloff=3
     " set scrolloff=0                " focus mode like in Writer app http://www.iawriter.com/
-    set showtabline=1              " Показывать вкладки табов только когда их больше одной
+    set showtabline=2              " Показывать вкладки табов только когда их больше одной
     set nowrap                     " Выключаем перенос строк (http://vimcasts.org/episodes/soft-wrapping-text/)
     set formatoptions-=o           " dont continue comments when pushing o/O
     set linebreak                  " Перенос не разрывая слов
@@ -154,12 +156,12 @@
       highlight ColorColumn ctermbg=52 guibg=#592929
     endif
 
-    if has('gui_running')
+    if has('gui_running') || exists('neovim_dot_app')
         "set gfn=Ubuntu\ Mono\ 14
         "set gfn=Droid\ Sans\ Mono\ for\ Powerline\ 12
         "set gfn=Monaco\ for\ Powerline:h13
-        "set gfn=Consolas:h14
-        set gfn=PragmataPro\ for\ Powerline:h15
+        "set gfn=Consolas\ for\ Powerline:h15
+        set gfn=Pragmata\ Pro:h15
         "set guioptions-=m
         "set guioptions-=T
         "set guioptions-=r
@@ -172,6 +174,10 @@
         "set guicursor+=a:blinkon0
         "set guiheadroom=0
         "set guitablabel=%N\ %f\ %M
+
+        if exists('&macligatures')
+            set macligatures
+        endif
     endif
 
     set hidden " this allows to edit several files in the same time without having to save them
@@ -244,20 +250,6 @@
         menu Encoding.koi8-r :e ++enc=koi8-r<CR>
         menu Encoding.cp866 :e ++enc=cp866<CR>
 
-    " Проверка орфографии
-        if version >= 700
-            set spell spelllang=
-            set nospell " По умолчанию проверка орфографии выключена
-            menu Spell.off :setlocal spell spelllang= <cr>
-            menu Spell.Russian+English :setlocal spell spelllang=ru,en <cr>
-            menu Spell.Russian :setlocal spell spelllang=ru <cr>
-            menu Spell.English :setlocal spell spelllang=en <cr>
-            menu Spell.-SpellControl- :
-            menu Spell.Word\ Suggest<Tab>z= z=
-            menu Spell.Previous\ Wrong\ Word<Tab>[s [s
-            menu Spell.Next\ Wrong\ Word<Tab>]s ]s
-        endif
-
     " Фолдинг
         " Всё, что нужно знать для начала:
         " za - скрыть/открыть текущую складку.
@@ -285,12 +277,9 @@
 " Шорткаты
     "let mapleader = "," " мапим <Leader> на запятую. По умолчанию <Leader> это обратный слэш \
 
-    " Переназначение ESC
-    inoremap jj <ESC>
-
     " ,пробел выключает подсветку результатов поиска
     map <leader><space> :noh<CR>
-    map <silent> <F7>   :noh<CR>
+    "map <silent> <F7>   :noh<CR>
 
     " shift-insert как в Xterm
     map <S-Insert> <esc>"+gPi
@@ -305,15 +294,9 @@
 
     map <leader>tt :NERDTreeToggle "'" . expand("%:p:h") ."'" <CR>
     map <leader>bb :BufExplorer<CR>
-    map <leader>tu :UltiSnipsEdit<CR>
 
     " ,m
         " в Normal mode тогглит поддержку мыши
-        if has('gui_running')
-            set mouse=a
-        else
-            set mouse=
-        endif
         function! ToggleMouse()
           if &mouse == 'a'
             set mouse=
@@ -337,6 +320,11 @@
     " < >
         vnoremap < <gv
         vnoremap > >gv
+
+    " ( )
+        vnoremap ( c(<ESC>pa)<ESC>
+        vnoremap [ c[<ESC>pa]<ESC>
+        vnoremap { c{<ESC>pa}<ESC>
 
     " ,p
         " Вставлять код извне без этой строчки проблематично, без нее начитается
@@ -410,7 +398,8 @@
 
     " ,v
         " Pressing ,v opens the .vimrc in a new tab
-        nmap <leader>v :edit $MYVIMRC<CR>
+        "nmap <leader>v :edit $MYVIMRC<CR>
+        nmap <leader>v :edit ~/.vimrc<CR>
 
     " n и N
         " когда бегаем по результатам поиска, то пусть они всегда будут в центре
@@ -501,6 +490,9 @@
     " Bind :Q to :q
         command! Q q
 
+    " Bind :E to FuzzyFinder
+        command! -nargs=* E FZF -m --query=<args>
+
     " {<CR>
         " auto complete {} indent and position the cursor in the middle line
         "inoremap {<CR> {<CR>}<Esc>O
@@ -516,10 +508,10 @@
     " Switch tabs with <Tab>
         nmap <Tab> gt
         nmap <S-Tab> gT
-        nnoremap <S-Left> gT
-        inoremap <S-Left> <Esc>gT
-        nnoremap <S-Right> gt
-        inoremap <S-Right> <Esc>gt
+        "nnoremap <S-Left> gT
+        "inoremap <S-Left> <Esc>gT
+        "nnoremap <S-Right> gt
+        "inoremap <S-Right> <Esc>gt
 
 
     " Ремапим русские символы
@@ -594,16 +586,20 @@
     " Разное
         nnoremap <F3>  :set expandtab!<CR>
         inoremap <F3>  <Esc>:set expandtab!<CR>a
-        nnoremap <F5>  :MBEbp<CR>
-        inoremap <F5>  <Esc>:MBEbp<CR>
-        nnoremap <S-Up> :MBEbp<CR>
-        inoremap <S-Up> <Esc>:MBEbp<CR>
-        nnoremap <F8>  :MBEbn<CR>
-        inoremap <F8>  <Esc>:MBEbn<CR>
-        nnoremap <S-Down> :MBEbn<CR>
-        inoremap <S-Down> <Esc>:MBEbn<CR>
-        nnoremap <F10> :MBEbd<CR>
-        nnoremap <F6>  :MBEbd<CR>
+        nnoremap <F5>  :bp<CR>
+        inoremap <F5>  <Esc>:bp<CR>
+        nnoremap <S-Left> :bp<CR>
+        nnoremap <S-Up> :bp<CR>
+        inoremap <S-Left> <Esc>:bp<CR>
+        inoremap <S-Up> <Esc>:bp<CR>
+        nnoremap <F8>  :bn<CR>
+        inoremap <F8>  <Esc>:bn<CR>
+        nnoremap <S-Right> :bn<CR>
+        nnoremap <S-Down> :bn<CR>
+        inoremap <S-Right> <Esc>:bn<CR>
+        inoremap <S-Down> <Esc>:bn<CR>
+        nnoremap <F10> :bd<CR>
+        nnoremap <F6>  :bd<CR>
         nnoremap * *N
         vnoremap <silent> * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
 
@@ -612,6 +608,7 @@
     abbr udd use Data::Dumper;<esc>
     abbr lwd log_warn Dumper
     abbr lw  log_warn
+    abbr ddp use DDP; p
 
 " Environment
     set history=1000 " store lots of :cmdline history
@@ -639,15 +636,30 @@
         au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
     " AutoReload .vimrc
-        " from http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
-        " Source the vimrc file after saving it
-        if has("autocmd")
-          autocmd! bufwritepost .vimrc source $MYVIMRC
-        endif
+        "autocmd! bufwritepost .vimrc source $MYVIMRC
 
     " Auto change the directory to the current file I'm working on
         "autocmd BufEnter * lcd %:p:h
-        autocmd BufEnter * ProjectRootCD
+        let g:autoProjRootCD = 1
+        function! ToggleAutoCD(...)
+            if a:0 == 1
+                if g:autoProjRootCD == 1
+                    let g:autoProjRootCD = 0
+                    echo "AutoProjectRootCD disabled"
+                else
+                    let g:autoProjRootCD = 1
+                    echo "AutoProjectRootCD enabled"
+                endif
+            else
+                if g:autoProjRootCD == 1
+                    ProjectRootCD
+                endif
+            endif
+        endfunction
+
+        autocmd BufEnter * call ToggleAutoCD()
+        map <Leader>acd :call ToggleAutoCD(1)<CR>
+        map <Leader>cd :ProjectRootCD<CR>
 
 " File specific
     au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
@@ -663,8 +675,8 @@
     function! SetGoFmtHighlight()
         if (&ft=='go')
             hi SpecialKey guibg=NONE
-            setlocal tabstop=8
-            setlocal shiftwidth=8
+            setlocal tabstop=4
+            setlocal shiftwidth=4
             setlocal noexpandtab
             if has('multi_byte')
                 if version >= 700
@@ -675,6 +687,7 @@
             endif
         else
             hi SpecialKey guibg=#073642
+            hi SpecialKey guibg=NONE
             if has('multi_byte')
                 if version >= 700
                     set listchars=tab:┊\ ,extends:❯,precedes:❮,nbsp:×,trail:\   " dummy comment to calm trailing space check
@@ -686,20 +699,20 @@
     endfunction
 
 " Цветовая схема
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     syntax enable
     set background=dark
-    let g:solarized_termcolors=16
-    let g:solarized_termtrans=1
-    let g:solarized_degrade=0
-    let g:solarized_bold=1
-    let g:solarized_underline=1
-    let g:solarized_italic=1
-    let g:solarized_termcolors=16
-    let g:solarized_contrast="normal"
-    let g:solarized_visibility="normal"
-    let g:solarized_diffmode="normal"
-    let g:solarized_hitrail=0
-    let g:solarized_menu=1
+    "let g:solarized_bold=1
+    "let g:solarized_contrast="normal"
+    "let g:solarized_degrade=0
+    "let g:solarized_diffmode="normal"
+    "let g:solarized_hitrail=0
+    "let g:solarized_italic=1
+    "let g:solarized_menu=1
+    "let g:solarized_termcolors=256
+    "let g:solarized_termtrans=0
+    "let g:solarized_underline=1
+    "let g:solarized_visibility="normal"
     colorscheme solarized
     "hi TabLineFill      ctermbg=237
     "hi TabLineSel       ctermbg=230 ctermfg=144
@@ -715,32 +728,36 @@
         endtry
 
     " MiniBufExplorer
-        let g:miniBufExplBRSplit = 1    " список буферов справа
-        let g:miniBufExplVSplit = 1
-        let g:miniBufExplMaxHeight = 45
+        let g:miniBufExplorerAutoStart = 0
+        let g:miniBufExplBRSplit = 0    " список буферов справа
+        let g:miniBufExplVSplit = 0
+        "let g:miniBufExplMaxHeight = 45
         let g:miniBufExplMaxSize = 0
 
-    " NERDTree
+    " NERDTree {{{
         let NERDTreeShowBookmarks=1
         let NERDTreeChDirMode=2
-        let NERDTreeQuitOnOpen=1
-        let NERDTreeShowHidden=0
+        let NERDTreeQuitOnOpen=0
+        let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=0
-        let NERDTreeMinimalUI=1 " Disables display of the 'Bookmarks' label and 'Press ? for help' text.
+        let NERDTreeMinimalUI=0 " Disables display of the 'Bookmarks' label and 'Press ? for help' text.
         let NERDTreeDirArrows=1 " Tells the NERD tree to use arrows instead of + ~ chars when displaying directories.
         let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
-        let NERDTreeWinSize=60
+        let NERDTreeWinSize=31
+        "autocmd vimenter * NERDTree
+        map <leader>tf :NERDTreeFind <CR>
+    " }}}
 
     " autocomplpop.vim {{{
         "let g:acp_behaviorPerlOmniLength = 2         " ипользовать perlomni.vim
-        let g:acp_enableAtStartup        = 1         " включить при старте системы
-        let g:acp_mappingDriven          = 0         " если 1 то будет включаться по хоткею
-        let g:acp_ignorecaseOption       = 1         " игнорировать регистр
-        let g:acp_completeOption         = '.,w,b,k' " опции дополнения (completeopt)
-        let g:acp_completeoptPreview     = 0         " показывать превью дополнения
-        let g:acp_behaviorKeywordCommand = "\<C-n>"  " комманда для автодополнения
-        let g:acp_behaviorKeywordLength  = 2         " количество символов для начала дополнения
-        let g:acp_behaviorKeywordIgnores = []        " не дополнять эти слова
+        "let g:acp_enableAtStartup        = 1         " включить при старте системы
+        "let g:acp_mappingDriven          = 0         " если 1 то будет включаться по хоткею
+        "let g:acp_ignorecaseOption       = 1         " игнорировать регистр
+        "let g:acp_completeOption         = '.,w,b,k' " опции дополнения (completeopt)
+        "let g:acp_completeoptPreview     = 0         " показывать превью дополнения
+        "let g:acp_behaviorKeywordCommand = "\<C-n>"  " комманда для автодополнения
+        "let g:acp_behaviorKeywordLength  = 2         " количество символов для начала дополнения
+        "let g:acp_behaviorKeywordIgnores = []        " не дополнять эти слова
     " }}}
 
     " tabularize {{{
@@ -781,8 +798,79 @@
         let g:airline#extensions#ctrlp#show_adjacent_modes = 1
         "let g:airline_left_sep=''
         "let g:airline_right_sep=''
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#fnamemod = ':t'
     " }}}
     " IndentLine {{{
         let g:indentLine_color_term = 11
         let g:indentLine_char = '│'
     " }}}
+
+    " Gist {{{
+        let g:gist_open_browser_after_post = 1
+        let g:gist_post_private = 1
+        let g:gist_show_privates = 1
+    " }}}
+
+    " Tagbar {{{
+        "let g:tagbar_expand = 1
+        "let g:tagbar_width = 40
+        "autocmd vimenter * TagbarOpen
+    " }}}
+
+    let python_highlight_all = 1
+
+
+    " Projects {{{
+
+        let $FZF_DEFAULT_COMMAND='ag -g ""'
+        let g:myProjects = {
+            \ 'games.mail.ru' : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/games-mail-ru/',
+            \ 'sociald'       : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/games-social/',
+            \ 'devops'        : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/devops/',
+            \ 'bonus.mail.ru' : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/bonus-mail-ru/',
+            \ 'gamenews'      : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/gamenews/',
+            \ 'monitoring'    : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/monitoring/',
+            \ 'streams'       : '~/mailru/servers/gm2.corp.mail.ru/home/sergey.morozov/git/streams-mail-ru/',
+            \ 'gmc-backend'   : '~/mailru/servers/alei53.mail.ru/home/sergey.morozov/git/back-games.my.com/',
+            \ 'gmc-frontend'  : '~/mailru/servers/alei53.mail.ru/home/sergey.morozov/git/games.my.com/',
+            \ 'legal'         : '~/mailru/servers/alei53.mail.ru/home/sergey.morozov/git/legal.my.com/',
+        \}
+
+        function! MyProjCD(prj)
+            let prj = substitute(a:prj, ' ', '', 'g')
+            if prj != ''
+                execute "lcd " . g:myProjects[prj]
+            endif
+        endfunction
+
+        let myPrjMenu = [
+            \ '------------|devgm2|-----------',
+            \ 'games.mail.ru',
+            \ 'sociald',
+            \ 'devops',
+            \ 'gamenews',
+            \ 'bonus.mail.ru',
+            \ 'monitoring',
+            \ 'streams',
+            \ '------------|alei53|-----------',
+            \ 'gmc-backend',
+            \ 'gmc-frontend',
+            \ 'legal'
+        \]
+
+        command! Prj call fzf#run({ 'options': '--reverse', 'source': myPrjMenu, 'down': '15', 'sink': function('MyProjCD') })
+    " }}}
+
+    " Global search {{{
+        function! GlfindGoto(line)
+            let parts = split(a:line, ':')
+            let excmd = 'e +' . parts[1] . ' ' . parts[0]
+            execute excmd
+        endfunction
+        command! -nargs=+ Glfind call fzf#run({ 'source': 'ag <q-args>', 'options': '--reverse', 'sink': function('GlfindGoto') })
+    " }}}
+
+    let $LC_ALL="en_US.UTF-8"
+	let $LC_CTYPE = "en_UTF-8"
+	let $LANG = "en_US.UTF-8"

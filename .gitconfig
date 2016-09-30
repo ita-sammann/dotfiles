@@ -23,7 +23,7 @@
 [diff]
     tool = vimdiff
 [core]
-	editor = vim
+	editor = nvim
 	pager = less -FSinXR
 [github]
 	user = ita-sammann
