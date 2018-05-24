@@ -117,7 +117,7 @@ export LC_CTYPE='en_US.UTF-8'
 export LC_COLLATE='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-export GOPATH=$HOME/go:$HOME/git/games-social/:$HOME/git/games-social/vendor/o
+export GOPATH=$HOME/go
 
 # Virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=1

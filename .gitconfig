@@ -23,7 +23,8 @@
 [diff]
     tool = vimdiff
 [core]
-	editor = nvim
+	editor = vim
 	pager = less -FSinXR
+	excludesfile = ~/.gitignore_global
 [github]
 	user = ita-sammann

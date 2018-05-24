@@ -17,8 +17,8 @@
     call plug#begin('~/.vim/bundle')
 
     " IDE
-        Plug 'DfrankUtil'
-        Plug 'vimprj'
+        Plug 'vim-scripts/DfrankUtil'
+        Plug 'vim-scripts/vimprj'
 
     " Interface
         "Plug 'nanotech/jellybeans.vim'
@@ -66,13 +66,13 @@
     " Mojolicious
         Plug 'yko/mojo.vim'
     " Django
-        Plug 'django.vim'
+        Plug 'vim-scripts/django.vim'
         Plug 'hdima/python-syntax'
         Plug 'nvie/vim-flake8'
     " Snippets
         "Plug 'UltiSnips'
     " Nginx
-        Plug 'nginx.vim'
+        Plug 'vim-scripts/nginx.vim'
     " Zen coding
         Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
     " Gist
