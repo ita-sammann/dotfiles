@@ -20,6 +20,7 @@
     co = checkout
     br = branch
     mg = merge
+    prorigin = remote prune origin
 [diff]
     tool = vimdiff
 [core]
