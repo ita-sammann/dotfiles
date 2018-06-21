@@ -20,6 +20,7 @@
     co = checkout
     br = branch
     mg = merge
+    stapull = ! git stash && git pull && git stash pop
     prorigin = remote prune origin
 [diff]
     tool = vimdiff
