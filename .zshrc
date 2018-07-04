@@ -126,3 +126,4 @@ DIR=$HOME/.gmr
 test -f $DIR/dir_colors && eval `dircolors $DIR/dir_colors`
 
 alias prj="ls ~/git | fzf | xargs -I{} tmux send-keys 'cd ~/git/'{} 'C-m'"
+alias ssadd="comm -23 <(find ~/.ssh -type f -name '*.pub' | perl -pe 's/\.pub\$//' | sort -u) <(ssh-add -l | awk '{ print \$3 }' | sort -u) | perl -pe 's!^.*/!!' | fzf | xargs -I{} ssh-add -K ~/.ssh/{}"
