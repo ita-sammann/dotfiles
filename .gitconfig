@@ -25,8 +25,13 @@
 [diff]
     tool = vimdiff
 [core]
-	editor = vim
-	pager = less -FSinXR -x1,5
-	excludesfile = ~/.gitignore_global
+    editor = vim
+    pager = less -FSinXR -x1,5
+    excludesfile = ~/.gitignore_global
 [github]
-	user = ita-sammann
+    user = ita-sammann
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
