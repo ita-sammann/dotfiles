@@ -1,6 +1,9 @@
 [user]
     name = Sergey Morozov
     email = ita.sammann@gmail.com
+    signingkey = 4B08C96219E6D34E
+    #email = sergey.morozov@insolar.io
+    #signingkey = 052EE05259001771
 [push]
     default = tracking
 [color]
@@ -12,7 +15,7 @@
     simple = "<%h> %ad [%an] %Cgreen%d%Creset %s"
     compact = "%C(yellow)%h%C(reset) - %C(green)%ad%C(white)%d%C(reset) %s %C(bold blue)<%an>%C(reset)"
 [alias]
-    graph = log --graph --date-order -C -M --pretty=compact --all --date=relative
+    graph = log --graph --date-order -C -M --pretty=compact --all --date=human
     graphb = log --graph --date-order -C -M --pretty=compact --date=relative
     graph2 = log --graph --date-order -C -M --pretty=simple --all --date=short
     st = status
@@ -22,6 +25,8 @@
     mg = merge
     stapull = ! git stash && git pull && git stash pop
     prorigin = remote prune origin
+    listtags = for-each-ref --sort=taggerdate --format '%(tag)' refs/tags
+    merged = ! BR=`git rev-parse --abbrev-ref HEAD` && git checkout master && git pull && git branch -d $BR
 [diff]
     tool = vimdiff
 [core]
@@ -35,3 +40,11 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[commit]
+	gpgsign = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[fetch]
+	prune = true
+[pull]
+	rebase = false

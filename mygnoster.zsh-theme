@@ -45,6 +45,7 @@ CURRENT_BG='NONE'
   # escape sequence with a single literal character.
   # Do not change this! Do not make it '\u2b80'; that is the old, wrong code point.
   SEGMENT_SEPARATOR=$'\ue0b0'
+  #SEGMENT_SEPARATOR=""
 }
 
 LEFTPROMPT=''

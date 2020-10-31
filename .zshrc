@@ -1,9 +1,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-PATH="/home/sergey.morozov/bin:/home/sergey.morozov/local/bin:/home/sergey.morozov/bin:/home/sergey.morozov/local/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="$HOME/bin:$HOME/local/bin"
+PATH="$PATH:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
 PATH="$PATH:/usr/local/python2.7/bin" # custom python
+PATH="$PATH:/usr/local/go/bin" # golang binaries path
 PATH="$PATH:$HOME/go/bin" # go bin path
+PATH="$PATH:$HOME/code/go/bin" # custom go bin path
 export PATH
 export MANPATH="/usr/local/man:$MANPATH"
 export LD_LIBRARY_PATH=${HOME}/local/lib/:${LD_LIBRARY_PATH}
@@ -58,7 +61,7 @@ ZSH_THEME="mygnoster"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(perl)
+plugins=(perl git docker kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -117,7 +120,7 @@ export LC_CTYPE='en_US.UTF-8'
 export LC_COLLATE='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/code/go
 
 # Virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -125,5 +128,9 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 DIR=$HOME/.gmr
 test -f $DIR/dir_colors && eval `dircolors $DIR/dir_colors`
 
-alias prj="ls ~/git | fzf | xargs -I{} tmux send-keys 'cd ~/git/'{} 'C-m'"
+#alias prj="ls ~/git | fzf | xargs -I{} tmux send-keys 'cd ~/git/'{} 'C-m'"
+alias prj="cd \`cat ~/.projects | fzf | awk '{ print \$(NF) }' | sed 's|~|$HOME|'\`"
 alias ssadd="comm -23 <(find ~/.ssh -type f -name '*.pub' | perl -pe 's/\.pub\$//' | sort -u) <(ssh-add -l | awk '{ print \$3 }' | sort -u) | perl -pe 's!^.*/!!' | fzf | xargs -I{} ssh-add -K ~/.ssh/{}"
+
+# Direnv
+eval "$(direnv hook zsh)"
