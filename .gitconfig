@@ -26,7 +26,8 @@
     stapull = ! git stash && git pull && git stash pop
     prorigin = remote prune origin
     listtags = for-each-ref --sort=taggerdate --format '%(tag)' refs/tags
-    merged = ! BR=`git rev-parse --abbrev-ref HEAD` && git checkout master && git pull && git branch -d $BR
+    merged = ! BR=`git rev-parse --abbrev-ref HEAD` && git checkout master && git branch -d $BR && git pull
+    pr = ! git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
 [diff]
     tool = vimdiff
 [core]
@@ -48,3 +49,5 @@
 	prune = true
 [pull]
 	rebase = false
+[init]
+	defaultBranch = master

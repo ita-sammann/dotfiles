@@ -5,8 +5,7 @@ PATH="$HOME/bin:$HOME/local/bin"
 PATH="$PATH:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
 PATH="$PATH:/usr/local/python2.7/bin" # custom python
 PATH="$PATH:/usr/local/go/bin" # golang binaries path
-PATH="$PATH:$HOME/go/bin" # go bin path
-PATH="$PATH:$HOME/code/go/bin" # custom go bin path
+PATH="$PATH:$HOME/code/go/bin" # go bin path
 export PATH
 export MANPATH="/usr/local/man:$MANPATH"
 export LD_LIBRARY_PATH=${HOME}/local/lib/:${LD_LIBRARY_PATH}
@@ -100,7 +99,7 @@ source ~/.zsh-autoenv/autoenv.zsh
 alias su='su -m'
 alias bashrc='. ~/.bashrc'
 alias zshrc='. ~/.zshrc'
-alias ll='ls -laFh --color=auto --group-directories-first'
+alias ll='gls -laFh --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias du='du -h'
 alias df='df -h'
@@ -108,6 +107,11 @@ alias psgr='ps aux | head -1; ps aux | ag '
 #alias tmux='tmux -2'
 alias su='sudo -E su -m'
 alias agl='ag --pager "less -F"'
+
+# Docker aliases
+alias docker-rmi-untagged='docker rmi $(docker images | grep '"'"'^<none>'"'"' | awk '"'"'{print $3}'"'"') && docker images'
+alias docker-rm-all='docker rm $(docker ps -aq) && docker ps -a'
+alias docker-volume-rm-all='docker volume rm $(docker volume ls -q) && docker volume ls'
 
 
 umask 0002
@@ -125,12 +129,22 @@ export GOPATH=$HOME/code/go
 # Virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/morozov/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/morozov/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/morozov/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/morozov/google-cloud-sdk/completion.zsh.inc'; fi
+
 DIR=$HOME/.gmr
 test -f $DIR/dir_colors && eval `dircolors $DIR/dir_colors`
 
 #alias prj="ls ~/git | fzf | xargs -I{} tmux send-keys 'cd ~/git/'{} 'C-m'"
 alias prj="cd \`cat ~/.projects | fzf | awk '{ print \$(NF) }' | sed 's|~|$HOME|'\`"
-alias ssadd="comm -23 <(find ~/.ssh -type f -name '*.pub' | perl -pe 's/\.pub\$//' | sort -u) <(ssh-add -l | awk '{ print \$3 }' | sort -u) | perl -pe 's!^.*/!!' | fzf | xargs -I{} ssh-add -K ~/.ssh/{}"
+alias ssadd="comm -23 <(find ~/.ssh -type f -name '*.pub' | perl -pe 's/\.pub\$//' | sort -u) <(ssh-add -l | awk '{ print \$3 }' | sort -u) | perl -pe 's!^.*/!!' | fzf | xargs -I{} ssh-add --apple-use-keychain ~/.ssh/{}"
+alias dc="docker-compose"
+alias dc-he="docker context use he.sammann.ru"
+alias dc-nuada="docker context use nuada"
+alias dc-local="docker context use desktop-linux"
 
 # Direnv
 eval "$(direnv hook zsh)"
