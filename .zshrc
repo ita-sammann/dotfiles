@@ -93,14 +93,14 @@ fi
 
 PROMPT_EOL_MARK="%F{white}%K{red}↩ %F%K"
 
-source ~/.iterm2_shell_integration.zsh
+#source ~/.iterm2_shell_integration.zsh
 source ~/.fzf.zsh
-source ~/.zsh-autoenv/autoenv.zsh
+#source ~/.zsh-autoenv/autoenv.zsh
 
 alias su='su -m'
 alias bashrc='. ~/.bashrc'
 alias zshrc='. ~/.zshrc'
-alias ll='ls -laFh --color=auto --group-directories-first'
+alias ll='ls -laFhv --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias du='du -h'
 alias df='df -h'
@@ -120,8 +120,6 @@ export LC_CTYPE='en_US.UTF-8'
 export LC_COLLATE='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-export GOPATH=$HOME/code/go
-
 # Virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
@@ -130,7 +128,11 @@ test -f $DIR/dir_colors && eval `dircolors $DIR/dir_colors`
 
 #alias prj="ls ~/git | fzf | xargs -I{} tmux send-keys 'cd ~/git/'{} 'C-m'"
 alias prj="cd \`cat ~/.projects | fzf | awk '{ print \$(NF) }' | sed 's|~|$HOME|'\`"
-alias ssadd="comm -23 <(find ~/.ssh -type f -name '*.pub' | perl -pe 's/\.pub\$//' | sort -u) <(ssh-add -l | awk '{ print \$3 }' | sort -u) | perl -pe 's!^.*/!!' | fzf | xargs -I{} ssh-add -K ~/.ssh/{}"
+alias ssadd="comm -23 <(find ~/.ssh -type f -name '*.pub' | perl -pe 's/\.pub\$//' | sort -u) <(ssh-add -l | awk '{ print \$3 }' | sort -u) | perl -pe 's!^.*/!!' | fzf | xargs -I{} ssh-add ~/.ssh/{}"
 
 # Direnv
 eval "$(direnv hook zsh)"
+
+# SSH-agent for WSL
+/usr/bin/keychain --nogui $HOME/.ssh/id_rsa
+source $HOME/.keychain/$HOST-sh

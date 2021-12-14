@@ -40,14 +40,14 @@
         " gitgutter works bad with sshfs
         Plug 'vim-scripts/bufexplorer.zip'
 
-        Plug 'edsono/vim-matchit'
+        "Plug 'edsono/vim-matchit'
         Plug 'kien/ctrlp.vim'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         "Plug 'jeetsukumaran/vim-markology'
     " Go
         Plug 'fatih/vim-go'
-        "Plug 'Valloric/YouCompleteMe'
+        Plug 'Valloric/YouCompleteMe'
     " HTML/HAML
         Plug 'othree/html5.vim'
     " CSS/LESS
