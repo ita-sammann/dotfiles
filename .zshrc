@@ -2,7 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 PATH="$HOME/bin:$HOME/local/bin"
-PATH="$PATH:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="$PATH:/opt/homebrew/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
 PATH="$PATH:/usr/local/python2.7/bin" # custom python
 PATH="$PATH:/usr/local/go/bin" # golang binaries path
 PATH="$PATH:$HOME/code/go/bin" # go bin path
@@ -11,6 +11,8 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LD_LIBRARY_PATH=${HOME}/local/lib/:${LD_LIBRARY_PATH}
 export EDITOR=vim
 export PAGER=less
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # Set name of the theme to load.
@@ -94,12 +96,12 @@ PROMPT_EOL_MARK="%F{white}%K{red}↩ %F%K"
 
 source ~/.iterm2_shell_integration.zsh
 source ~/.fzf.zsh
-source ~/.zsh-autoenv/autoenv.zsh
+#source ~/.zsh-autoenv/autoenv.zsh
 
 alias su='su -m'
 alias bashrc='. ~/.bashrc'
 alias zshrc='. ~/.zshrc'
-alias ll='gls -laFh --color=auto --group-directories-first'
+alias ll='gls -laFhv --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias du='du -h'
 alias df='df -h'

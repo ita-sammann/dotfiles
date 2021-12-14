@@ -57,8 +57,8 @@ RIGHTPROMPT=''
 prompt_segment() {
   local bg fg
   if [[ -n $1 ]]; then
-    if [[ $1 =~ ':' ]]; then
-      bg="\e[48:2:${1}m"
+    if [[ $1 =~ ';' ]]; then
+      bg="\e[48;2;${1}m"
     else
       bg="%K{$1}"
     fi
@@ -67,8 +67,8 @@ prompt_segment() {
   fi
 
   if [[ -n $2 ]]; then
-    if [[ $2 =~ ':' ]]; then
-      fg="\e[38:2:${2}m"
+    if [[ $2 =~ ';' ]]; then
+      fg="\e[38;2;${2}m"
     else
       fg="%F{$2}"
     fi
@@ -77,8 +77,8 @@ prompt_segment() {
   fi
 
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    if [[ $CURRENT_BG =~ ':' ]]; then
-      LEFTPROMPT="$LEFTPROMPT %{$bg\e[38:2:${CURRENT_BG}m%}$SEGMENT_SEPARATOR%{$fg%} "
+    if [[ $CURRENT_BG =~ ';' ]]; then
+      LEFTPROMPT="$LEFTPROMPT %{$bg\e[38;2;${CURRENT_BG}m%}$SEGMENT_SEPARATOR%{$fg%} "
     else
       LEFTPROMPT="$LEFTPROMPT %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
     fi
@@ -92,8 +92,8 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    if [[ $CURRENT_BG =~ ':' ]]; then
-      LEFTPROMPT="$LEFTPROMPT %{%k\e[38:2:${CURRENT_BG}m%}$SEGMENT_SEPARATOR"
+    if [[ $CURRENT_BG =~ ';' ]]; then
+      LEFTPROMPT="$LEFTPROMPT %{%k\e[38;2;${CURRENT_BG}m%}$SEGMENT_SEPARATOR"
     else
       LEFTPROMPT="$LEFTPROMPT %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
     fi
@@ -131,7 +131,7 @@ prompt_git() {
     if [[ -n $dirty ]]; then
       prompt_segment yellow black
     else
-      prompt_segment '33:132:100' black
+      prompt_segment '33;132;100' black
     fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
@@ -217,7 +217,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment '33:100:132' 'black' '%~'
+  prompt_segment '33;100;132' 'black' '%~'
 }
 
 # Virtualenv: current working virtualenv
