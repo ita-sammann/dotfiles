@@ -6,6 +6,7 @@
     #signingkey = 052EE05259001771
 [push]
     default = tracking
+    autoSetupRemote = true
 [color]
     branch = auto
     diff = auto
@@ -32,7 +33,8 @@
     tool = vimdiff
 [core]
     editor = vim
-    pager = less -FSinXR -x1,5
+    #pager = less -FSinXR -x1,5
+    pager = bat -p
     excludesfile = ~/.gitignore_global
 [github]
     user = ita-sammann
