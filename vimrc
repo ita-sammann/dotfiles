@@ -47,7 +47,7 @@
         "Plug 'jeetsukumaran/vim-markology'
     " Go
         Plug 'fatih/vim-go'
-        Plug 'Valloric/YouCompleteMe'
+        "Plug 'Valloric/YouCompleteMe'
     " HTML/HAML
         Plug 'othree/html5.vim'
     " CSS/LESS

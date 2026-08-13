@@ -29,10 +29,12 @@
     listtags = for-each-ref --sort=taggerdate --format '%(tag)' refs/tags
     merged = ! BR=`git rev-parse --abbrev-ref HEAD` && git checkout master && git branch -d $BR && git pull
     pr = ! git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
+    diffc = diff --cached
+    diffs = diff --staged
 [diff]
     tool = vimdiff
 [core]
-    editor = vim
+    editor = nvim
     #pager = less -FSinXR -x1,5
     pager = bat -p
     excludesfile = ~/.gitignore_global

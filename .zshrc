@@ -1,18 +1,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-PATH="$HOME/bin:$HOME/local/bin"
-PATH="$PATH:/opt/homebrew/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
-PATH="$PATH:/usr/local/python2.7/bin" # custom python
+PATH="$HOME/bin:$HOME/local/bin:$HOME/.local/bin"
+PATH="$PATH:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="$PATH:/snap/bin"
 PATH="$PATH:/usr/local/go/bin" # golang binaries path
 export PATH
 export MANPATH="/usr/local/man:$MANPATH"
 export LD_LIBRARY_PATH=${HOME}/local/lib/:${LD_LIBRARY_PATH}
-export EDITOR=vim
-export PAGER=less
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
+export EDITOR=nvim
+export PAGER=bat
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
